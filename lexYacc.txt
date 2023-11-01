@@ -1,0 +1,21 @@
+%option noyywrap
+%{
+#include<stdio.h>
+#include<stdlib.h>
+#include "y.tab.h"
+%}
+alpha [A-Za-z]
+digit [0-9]
+%%
+[ \t\n]
+struct   return STRUCT;
+main return MAIN;
+{alpha}({alpha}|{digit})*    return ID;
+"(" return OB;
+")" return CB;
+"[" return OS;
+"]" return CS;
+"{" return OP;
+"}" return CP;
+.    return yytext[0];
+%%
